@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section class="section container page-list">
+  <header class="list-head">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="list-sub">{{ . }}</p>{{ end }}
+  </header>
+  <div class="grid">
+    {{- range .RegularPages.ByWeight }}
+    {{ partial "card.html" . }}
+    {{- end }}
+  </div>
+</section>
+{{ end }}

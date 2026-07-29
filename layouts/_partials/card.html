@@ -1,0 +1,21 @@
+{{- /* Project card used on home and section list pages */ -}}
+<a class="card" href="{{ .RelPermalink }}">
+  <div class="card-body">
+    <div class="card-top">
+      {{- with .Params.icon }}
+      <img class="card-icon" src="{{ . | relURL }}" alt="" loading="lazy">
+      {{- else }}
+      <div class="card-icon card-icon-fallback" data-initial="{{ substr .Title 0 1 | upper }}"></div>
+      {{- end }}
+      <h3 class="card-title">{{ .Title }}</h3>
+    </div>
+    <p class="card-desc">{{ .Description }}</p>
+    {{- with .Params.tags }}
+    <div class="tags">
+      {{- range first 4 . }}
+      <span class="tag">{{ . }}</span>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+</a>

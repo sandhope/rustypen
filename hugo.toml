@@ -1,0 +1,36 @@
+# Site configuration — https://gohugo.io/configuration/
+baseURL = "https://rustypen.com/"
+title = "sandhope"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+
+# Keep the site lean: no taxonomy/term pages, no RSS
+disableKinds = ["taxonomy", "term", "rss"]
+
+[params]
+  org = "sandhope"
+  githubOrg = "https://github.com/sandhope"
+
+[languages]
+  [languages.en]
+    locale = "en"
+    label = "English"
+    weight = 1
+  [languages.zh]
+    locale = "zh-CN"
+    label = "中文"
+    weight = 2
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      # Allow raw HTML inside markdown (e.g. <video>, <details>)
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+
+[outputs]
+  home = ["html", "sitemap"]
+  section = ["html"]
+  page = ["html"]
