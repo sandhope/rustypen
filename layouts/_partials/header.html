@@ -29,11 +29,11 @@
              falling back to the other language's home page */}}
       {{- if .IsTranslated }}
         {{- range .Translations }}
-      <a class="icon-btn lang-switch" href="{{ .RelPermalink }}" title="{{ i18n "switch_lang" }}">{{ .Language.Label }}</a>
+      <a class="icon-btn lang-switch" href="{{ .RelPermalink }}" data-lang="{{ .Language.Lang }}" title="{{ i18n "switch_lang" }}">{{ .Language.Label }}</a>
         {{- end }}
       {{- else }}
-        {{- range site.Sites }}{{ if ne .Language.Lang $.Language.Lang }}
-      <a class="icon-btn lang-switch" href="{{ .Home.RelPermalink }}" title="{{ i18n "switch_lang" }}">{{ .Language.Label }}</a>
+        {{- range hugo.Sites }}{{ if ne .Language.Lang $.Language.Lang }}
+      <a class="icon-btn lang-switch" href="{{ .Home.RelPermalink }}" data-lang="{{ .Language.Lang }}" title="{{ i18n "switch_lang" }}">{{ .Language.Label }}</a>
         {{- end }}{{ end }}
       {{- end }}
 

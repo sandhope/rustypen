@@ -37,6 +37,29 @@
   })();
 </script>
 
+{{- /* Language redirect: only on the default-language home page, send the
+       visitor to their saved language (set by the header switcher), or match
+       the browser language on a first visit. Targets are read from the
+       hreflang alternate links above. Deep links and the other language's
+       home are never rewritten, so there is no redirect loop. */}}
+{{- if and .IsHome (eq .Language.Lang hugo.Sites.Default.Language.Lang) }}
+<script>
+  (function () {
+    var pref = localStorage.getItem("lang") ||
+      (navigator.languages && navigator.languages[0]) || navigator.language || "";
+    pref = pref.split("-")[0].toLowerCase();
+    if (!pref || pref === document.documentElement.lang.split("-")[0].toLowerCase()) return;
+    var links = document.querySelectorAll('link[rel="alternate"][hreflang]');
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].hreflang.split("-")[0].toLowerCase() === pref) {
+        location.replace(links[i].href);
+        return;
+      }
+    }
+  })();
+</script>
+{{- end }}
+
 {{- with resources.Get "css/main.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
 {{- end }}

@@ -16,3 +16,13 @@
     }
   });
 })();
+
+// Language switch — remember the explicit choice so the home page
+// redirect (inline script in <head>) can honor it on the next visit
+(function () {
+  document.querySelectorAll(".lang-switch[data-lang]").forEach(function (link) {
+    link.addEventListener("click", function () {
+      localStorage.setItem("lang", link.dataset.lang);
+    });
+  });
+})();
